@@ -38,9 +38,9 @@ def eqr_to_rectilinear(im_eqr, ang, aspect_ratio=1, cam_height=None, eqr_overlay
     lat = (lat + 1.0) * eqr_height/2
     long = (long + 1.0) * eqr_width/2
     
-    if len(im_eqr.shape) == 3:
-        im_win = np.zeros((cam_height, cam_width, 3), dtype=im_eqr.dtype)
+    if len(im_eqr.shape) > 2:
         interp = cv2.INTER_CUBIC
+        im_win = np.zeros((cam_height, cam_width, im_eqr.shape[2]), dtype=im_eqr.dtype)
     else:
         interp = cv2.INTER_NEAREST
         im_win = np.zeros((cam_height, cam_width), dtype=im_eqr.dtype)
